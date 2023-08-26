@@ -91,7 +91,7 @@ func whereami() (lat float64, lng float64, err error) {
 }
 
 func setupOauthEncryption() error {
-	const service = "barista-sample-bar"
+	const service = "barista-github"
 	var username string
 	if u, err := user.Current(); err == nil {
 		username = u.Username
@@ -227,22 +227,25 @@ func main() {
 		return outputs.Textf("%s: %v", s.Name, s.IPs[0])
 	})
 
-	ghNotify := github.New("%%GITHUB_CLIENT_ID%%", "%%GITHUB_CLIENT_SECRET%%").
+	ghNotify := github.New(os.Getenv("GITHUB_CLIENT_ID"), os.Getenv("GITHUB_CLIENT_SECRET")).
 		Output(func(n github.Notifications) bar.Output {
 			if n.Total() == 0 {
 				return nil
 			}
-			out := outputs.Group(
-				pango.Icon("fab-github").
-					Concat(spacer).
-					ConcatTextf("%d", n.Total()))
+			icon := outputs.Text("")
+			bell := outputs.Text("")
+
+			out := outputs.Group()
+
+			out.Append(icon)
+			out.Append(spacer)
+			out.Append(outputs.Textf("%d", n.Total()))
+
 			mentions := n["mention"] + n["team_mention"]
 			if mentions > 0 {
 				out.Append(spacer)
-				out.Append(outputs.Pango(
-					pango.Icon("mdi-bell").
-						ConcatTextf("%d", mentions)).
-					Urgent(true))
+				out.Append(bell)
+				out.Append(outputs.Textf("%d", mentions).Urgent(true))
 			}
 			return out.Glue().OnClick(
 				click.RunLeft("xdg-open", "https://github.com/notifications"))
