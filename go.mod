@@ -2,10 +2,12 @@ module github.com/trbjo/barista_trbjo
 
 go 1.21.0
 
-require github.com/zalando/go-keyring v0.2.3
+require (
+	barista.run v0.0.0-20230818005425-fedaf33ea198
+	github.com/zalando/go-keyring v0.2.3
+)
 
 require (
-	barista.run v0.0.0-20230818005425-fedaf33ea198 // indirect
 	github.com/alessio/shellescape v1.4.1 // indirect
 	github.com/danieljoos/wincred v1.2.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
@@ -17,13 +19,12 @@ require (
 	github.com/spf13/afero v1.9.5 // indirect
 	github.com/vishvananda/netlink v1.1.0 // indirect
 	github.com/vishvananda/netns v0.0.1 // indirect
-	golang.org/x/crypto v0.12.0 // indirect
-	golang.org/x/net v0.14.0 // indirect
+	golang.org/x/crypto v0.14.0 // indirect
+	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/oauth2 v0.11.0 // indirect
-	golang.org/x/sys v0.11.0 // indirect
-	golang.org/x/text v0.12.0 // indirect
+	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
